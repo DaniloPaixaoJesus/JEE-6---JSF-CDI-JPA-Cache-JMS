@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width" />
+<link rel="shortcut icon"
+	href="#{request.contextPath}/resources/imagens/favicon.ico"
+	type="image/ico" />
+<link href="https://plus.google.com/108540024862647200608"
+	rel="publisher" />
+
+<title>#{livroDetalheBean.livro.titulo} - Casa do Código</title>
+
+<script type="text/javascript" async=""
+	src="#{request.contextPath}/resources/js/pixel.js"></script>
+<script type="text/javascript" async=""
+	src="#{request.contextPath}/resources/js/ec.js"></script>
+<script type="text/javascript" async=""
+	src="#{request.contextPath}/resources/js/analytics.js"></script>
+<script type="text/javascript" async=""
+	src="#{request.contextPath}/resources/js/userreport.js"></script>
+<script src="#{request.contextPath}/resources/js/eoo8tyd.js" async=""></script>
+<script type="text/javascript" async=""
+	src="#{request.contextPath}/resources/js/shopify_stats.js"></script>
+<script async=""
+	src="#{request.contextPath}/resources/js/trekkie.storefront.min.js"></script>
+<script async=""
+	src="#{request.contextPath}/resources/js/shop_events_listener-002c206011fad5a2879a7a294d2ab2bc92451d9e2b5bbd0e634db3265e15665e.js"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/js/ga_urchin_forms-0826cdefee6590321eb5c0c435eeebf7a8425a5493a9e95059c40e07e069ad52.js"></script>
+
+
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/reset.css" />
+
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/container.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/cabecalhoPrincipal.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/logo.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/colecoesDaCDC.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/buscaPrincipal.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/sacola.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/infoSection.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/imagemLivroNinja.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/livroNaVitrine.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/vitrineDestacao.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/vitrineDestaquinho.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/camiseta.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/tamanhoDasCamisetas.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/adicionarCamisetaAoCarrinho.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/cabecalhoProdutoLivro.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/adicionarAoCarrinho.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/produtoEmPreVenda.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/conteudoDoLivro.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/autoresDoLivro.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/comentariosDoLivro.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/infosAdicionaisDoLivro.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/recomendacoesDoLivro.css" />
+
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/cabecalhoDaColecao.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/vitrineDaColecao.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/curadorDaColecao.css" />
+
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/carrinho.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/formularioDoCarrinho.css" />
+
+<link href="#{request.contextPath}/resources/css/compartilhar.css"
+	rel="stylesheet" />
+
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/busca.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/paginacao.css" />
+
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/rodape.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/categorias.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/caelumGroup.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/buscaDoRodape.css" />
+
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/e404.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/frete.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/sobre.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/faq.css" />
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/css/homeCall.css" />
+<link rel="stylesheet" href="#{request.contextPath}/resources/css/l"
+	media="all" />
+
+<script src="#{request.contextPath}/resources/js/settings.js" async=""
+	class="lazyload" charset="utf-8"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/js/pub_5d9e31afbcac9492bffa.js"></script>
+<script src="#{request.contextPath}/resources/js/SystemSettings.js"
+	async="" class="lazyload" charset="utf-8"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/js/jquery.min.js"></script>
+
+</head>
+
+<body cz-shortcut-listen="true">
+
+	<main>
+	<section class="infoSection container">
+		<h2 class="infoSection-titulo">Seu carrinho</h2>
+
+		<form class="formularioDoCarrinho" method="post" jsf:id="formCarrinho">
+			<table class="formularioDoCarrinho-tabela">
+				<thead class="formularioDoCarrinho-cabecalho">
+					<tr>
+						<th></th>
+						<th class="formularioDoCarrinho-cabecalho-item">Item</th>
+						<th
+							class="formularioDoCarrinho-cabecalho-item formularioDoCarrinho-cabecalho-preco">Preço</th>
+						<th class="formularioDoCarrinho-cabecalho-item">Qtd</th>
+						<th class="formularioDoCarrinho-cabecalho-item">Total</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<ui:repeat value="#{carrinhoCompras.itens}" var="carrinhoItem"
+						varStatus="loop">
+						<tr>
+							<td class="formularioDoCarrinho-item"><a
+								href="#{request.contextPath}/livro-detalhe.xhtml?id=#{carrinhoItem.livro.id}">
+									<img class="formularioDoCarrinho-item-imagem"
+									src="#{carrinhoItem.livro.capaPath}" />
+							</a></td>
+							<td class="formularioDoCarrinho-item">
+								<h2 class="formularioDoCarrinho-item-titulo">#{carrinhoItem.livro.titulo}</h2>
+							</td>
+							<td
+								class="formularioDoCarrinho-item formularioDoCarrinho-item-preco">R$
+								#{carrinhoItem.livro.preco}</td>
+							<td class="formularioDoCarrinho-item"><input
+								class="formularioDoCarrinho-item-quantidade" type="number"
+								min="0"
+								jsf:value="#{carrinhoCompras.itens[loop.index].quantidade}" />
+							</td>
+							<td
+								class="formularioDoCarrinho-item formularioDoCarrinho-item-precoTotal"
+								title="Preço unitário: R$ #{carrinhoItem.livro.preco}">R$
+								#{carrinhoCompras.getTotal(carrinhoItem)}</td>
+							<td class="formularioDoCarrinho-item"><a
+								jsf:action="#{carrinhoComprasBean.remover(carrinhoItem)}"> <img
+									class="formularioDoCarrinho-item-remover-imagem"
+									src="#{request.contextPath}/resources/imagens/trash.png"
+									alt="X" title="Remover" />
+							</a></td>
+						</tr>
+					</ui:repeat>
+				</tbody>
+				<tfoot class="formularioDoCarrinho-rodape">
+					<tr>
+						<td
+							class="formularioDoCarrinho-rodape-item formularioDoCarrinho-finalizar"
+							colspan="3">
+							<button class="formularioDoCarrinho-finalizar-botao"
+								jsf:action="checkout" type="submit">
+								Finalizar<span
+									class="formularioDoCarrinho-finalizar-botao-texto"
+									role="presentation"> compra</span>
+							</button>
+						</td>
+						<td class="formularioDoCarrinho-rodape-item">
+							<button class="formularioDoCarrinho-atualizar" type="submit"
+								jsf:id="btnAtualizar">Atualizar</button>
+						</td>
+						<td class="formularioDoCarrinho-rodape-item">R$
+							#{carrinhoCompras.getTotal()}</td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		</form>
+
+	</section>
+
+	</main>
+
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/trackExternalLinks.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/userreport.js"></script>
+</body>
+
+</html>
