@@ -64,7 +64,7 @@
 		</div>
 		<div class="form-group">
 			<h:outputLabel value="Autores" />
-			<h:selectManyListbox	 value="#{adminLivrosBean.livro.autores}"
+			<h:selectManyListbox value="#{adminLivrosBean.livro.autores}"
 					converter="autorConverter" id="autores" styleClass="form-control">
 				<f:selectItems value="#{adminLivrosBean.autores}"
 					var="autor"
@@ -79,7 +79,7 @@
 			<h:message for="dataPublicacao" />
 		</div>
 		<div class="form-group">
-			<h:outputLabel value="Capa do Livro" />
+			<h:outputLabel value="URL Capa do Livro" />
 			<h:inputText value="#{adminLivrosBean.livro.capaPath}"
 				id="capaPath" styleClass="form-control" />
 			

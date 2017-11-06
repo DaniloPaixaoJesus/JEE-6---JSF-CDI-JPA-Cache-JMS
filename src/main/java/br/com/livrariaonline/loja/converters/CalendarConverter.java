@@ -20,15 +20,20 @@ public class CalendarConverter implements Converter {
 		converter.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
 	}
 	
+	
+	//tela para mb
 	@Override
 	public Object getAsObject(FacesContext context, 
 			UIComponent component, String dataTexto) {
+		if(dataTexto == null || dataTexto.trim().equals(""))
+			return null;
 		Date data = (Date) converter.getAsObject(context, component, dataTexto);
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(data);
 		return calendar;
 	}
 
+	//mb para a tela
 	@Override
 	public String getAsString(FacesContext context, 
 			UIComponent component, Object dataObject) {
