@@ -17,8 +17,7 @@ public class PagamentoGateway implements Serializable {
 		Pagamento pagamento = new Pagamento(total);
 		String target = "http://book-payment.herokuapp.com/payment";
 		Client client = ClientBuilder.newClient();
-		return client.target(target).request()
-			.post(Entity.json(pagamento), String.class);
+		return client.target(target).request().post(Entity.json(pagamento), String.class);
 	}
 	
 }

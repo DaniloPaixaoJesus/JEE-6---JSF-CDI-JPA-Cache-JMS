@@ -36,21 +36,40 @@ public class PagamentoService {
 	public void pagar(@Suspended final AsyncResponse ar, @QueryParam("uuid") String uuid) {
 		Compra compra = compraDao.buscaPorUuid(uuid);
 		
-		executor.submit(() -> {
-			try {
-				String resposta = pagamentoGateway.pagar(compra.getTotal());
-				System.out.println(resposta);
-				
-				URI responseUri = UriBuilder.fromPath("http://localhost:8080" + 
-						context.getContextPath() + "/index.xhtml")
-						.queryParam("msg", "Compra Realizada com Sucesso")
-						.build();
-				Response response = Response.seeOther(responseUri).build();
-				ar.resume(response);
-			} catch (Exception e) {
-				ar.resume(new WebApplicationException(e));
+		//execucao assincrona
+		executor.submit(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					String resposta = pagamentoGateway.pagar(compra.getTotal());
+					System.out.println(resposta);
+					
+					URI responseUri = UriBuilder.fromPath("http://localhost:8080" + 
+							context.getContextPath() + "/index.xhtml")
+							.queryParam("msg", "Compra Realizada com Sucesso")
+							.build();
+					Response response = Response.seeOther(responseUri).build();
+					ar.resume(response);
+				} catch (Exception e) {
+					ar.resume(new WebApplicationException(e));
+				}
 			}
 		});
+	}
+	
+	@POST
+	public Response pagar1(@QueryParam("uuid") String uuid) {
+		Compra compra = compraDao.buscaPorUuid(uuid);
+		String resposta = pagamentoGateway.pagar(compra.getTotal());
+		System.out.println(resposta);
+		
+		URI responseUri = UriBuilder.fromPath("http://localhost:8080" + 
+				context.getContextPath() + "/index.xhtml")
+				.queryParam("msg", "Compra Realizada com Sucesso")
+				.build();
+		Response response = Response.seeOther(responseUri).build();
+		return response;
+		
 	}
 	
 }
