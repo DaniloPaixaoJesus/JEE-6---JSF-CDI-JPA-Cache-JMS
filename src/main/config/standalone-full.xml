@@ -14,22 +14,7 @@
 					<password>sa</password>
 				</security>
 			</datasource>
-			<datasource jndi-name="java:jboss/datasources/casadocodigoDS"
-				pool-name="casadocodigoDS">
-				<connection-url>jdbc:mysql://localhost:3306/casadocodigo_javaee</connection-url>
-				<connection-property name="DatabaseName">
-					casadocodigo_javaee
-				</connection-property>
-				<driver>mysql</driver>
-				<pool>
-					<min-pool-size>10</min-pool-size>
-					<max-pool-size>20</max-pool-size>
-				</pool>
-				<security>
-					<user-name>root</user-name>
-					<password>root</password>
-				</security>
-			</datasource>
+			
 			<datasource jndi-name="java:jboss/datasources/livrariaOnLineDS"
 				pool-name="livrariaOnLineDS">
 				<connection-url>jdbc:hsqldb:mem:livrariaOnLine</connection-url>
