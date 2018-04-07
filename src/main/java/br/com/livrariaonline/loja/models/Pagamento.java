@@ -2,6 +2,11 @@ package br.com.livrariaonline.loja.models;
 
 import java.math.BigDecimal;
 
+/**
+ * VO represent payment
+ * @author danilo
+ *
+ */
 public class Pagamento {
 
 	private BigDecimal value;

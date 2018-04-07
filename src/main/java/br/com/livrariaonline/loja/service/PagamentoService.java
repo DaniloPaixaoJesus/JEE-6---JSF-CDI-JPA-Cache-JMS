@@ -19,6 +19,13 @@ import javax.ws.rs.core.UriBuilder;
 import br.com.livrariaonline.loja.daos.CompraDao;
 import br.com.livrariaonline.loja.models.Compra;
 
+/**
+ * class manage payment service
+ * this service is expose using url "payment" on @Path annotation
+ *  relative URI path indicating where the Java class will be hosted
+ * @author danilo
+ *
+ */
 @Path("/pagamento")
 public class PagamentoService {
 
@@ -32,11 +39,16 @@ public class PagamentoService {
 	
 	private static ExecutorService executor = Executors.newFixedThreadPool(50);
 	
-	@POST
-	public void pagar(@Suspended final AsyncResponse ar, @QueryParam("uuid") String uuid) {
-		Compra compra = compraDao.buscaPorUuid(uuid);
+	/**
+	 * should be here only one VERB in the class: GET, POST, PUT, DELETE, ETC
+	 * assync method example
+	 * @param argUuid
+	 * @return
+	 */
+	/*@POST
+	public void pagarAssync(@Suspended final AsyncResponse ar, @QueryParam("uuid") String argUuid) {
+		Compra compra = compraDao.buscaPorUuid(argUuid);
 		
-		//execucao assincrona
 		executor.submit(new Runnable() {
 			@Override
 			public void run() {
@@ -56,10 +68,16 @@ public class PagamentoService {
 			}
 		});
 	}
+	*/
 	
+	/**
+	 * should be here only one VERB in the class: GET, POST, PUT, DELETE, ETC
+	 * @param argUuid
+	 * @return
+	 */
 	@POST
-	public Response pagar1(@QueryParam("uuid") String uuid) {
-		Compra compra = compraDao.buscaPorUuid(uuid);
+	public Response pagar(@QueryParam("uuid") String argUuid) {
+		Compra compra = compraDao.buscaPorUuid(argUuid);
 		String resposta = pagamentoGateway.pagar(compra.getTotal());
 		System.out.println(resposta);
 		

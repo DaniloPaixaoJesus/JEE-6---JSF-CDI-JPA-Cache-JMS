@@ -10,6 +10,11 @@ import br.com.livrariaonline.loja.models.CarrinhoCompras;
 import br.com.livrariaonline.loja.models.Compra;
 import br.com.livrariaonline.loja.models.Usuario;
 
+/**
+ * class to confirm purchase
+ * @author danilo
+ *
+ */
 @Model
 public class CheckoutBean {
 
@@ -27,9 +32,10 @@ public class CheckoutBean {
 		compra.setUsuario(usuario);
 		carrinho.finalizar(compra);
 		
+		//after finish a purchase, it will be redirect to payment url
 		String contextName = facesContext.getExternalContext().getRequestContextPath();
 		HttpServletResponse response = (HttpServletResponse)facesContext.getExternalContext().getResponse();
-		response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+		response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);//status 307 temp redirect 
 		response.setHeader("Location", contextName+"/services/pagamento?uuid="+compra.getUuid());
 	}
 
