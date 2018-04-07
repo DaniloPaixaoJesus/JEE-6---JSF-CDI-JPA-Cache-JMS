@@ -20,7 +20,9 @@
 
 <body cz-shortcut-listen="true">
 
+	<h:outputText value="#{param['msg']}" />
 	<main> 
+		<!-- it will cache the JSF life cycle; the manage bean will not be called  -->
 		<o:cache>
 			<section class="vitrineDestaquinho container">
 				<h2 class="vitrineDestaquinho-titulo">Últimos lançamentos</h2>

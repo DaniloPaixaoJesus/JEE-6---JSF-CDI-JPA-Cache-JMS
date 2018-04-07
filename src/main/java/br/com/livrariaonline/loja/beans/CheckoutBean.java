@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import br.com.livrariaonline.loja.models.CarrinhoCompras;
 import br.com.livrariaonline.loja.models.Compra;
 import br.com.livrariaonline.loja.models.Usuario;
+import br.com.livrariaonline.loja.service.PagamentoService;
 
 /**
  * class to confirm purchase
@@ -26,6 +27,9 @@ public class CheckoutBean {
 	@Inject
 	private FacesContext facesContext;
 	
+	@Inject
+	PagamentoService pagamentoService;
+	
 	@Transactional
 	public void finalizar() {
 		Compra compra = new Compra();
@@ -33,10 +37,14 @@ public class CheckoutBean {
 		carrinho.finalizar(compra);
 		
 		//after finish a purchase, it will be redirect to payment url
+		//test the own rest api call
 		String contextName = facesContext.getExternalContext().getRequestContextPath();
 		HttpServletResponse response = (HttpServletResponse)facesContext.getExternalContext().getResponse();
 		response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);//status 307 temp redirect 
 		response.setHeader("Location", contextName+"/services/pagamento?uuid="+compra.getUuid());
+		
+		//using service directly, see why doesn' work
+		//pagamentoService.pagar(compra.getUuid());
 	}
 
 	public Usuario getUsuario() {

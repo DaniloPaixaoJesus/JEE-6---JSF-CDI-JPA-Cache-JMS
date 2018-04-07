@@ -3,10 +3,12 @@ package br.com.livrariaonline.loja.daos;
 import java.util.List;
 
 import javax.ejb.Stateful;
+import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.jpa.QueryHints;
 
 import br.com.livrariaonline.loja.models.Livro;
@@ -54,6 +56,21 @@ public class LivroDao {
 		return manager.createQuery(jpql, Livro.class)
 				.setParameter("id", id)
 				.getSingleResult();
+	}
+	
+	public void limpaCache() {
+	    Cache cache = manager.getEntityManagerFactory().getCache();
+	    cache.evict(Livro.class);
+	    cache.evict(Livro.class, 1L);
+	    cache.evictAll();
+	    
+	    SessionFactory factory = manager.getEntityManagerFactory().unwrap(SessionFactory.class);
+	    factory.getCache().evictAllRegions();
+	    factory.getCache().evictQueryRegion("home");//who is in "home" will be clear
+	    //.setHint(QueryHints.HINT_CACHE_REGION, "home")
+	    //it is not JPA, it is HIBERNATE
+
+	    //independente de limpar programaticamente, o cache sempre sera limpo apos insert, update ou delete
 	}
 	
 }

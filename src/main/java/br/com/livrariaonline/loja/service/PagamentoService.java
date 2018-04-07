@@ -37,6 +37,10 @@ public class PagamentoService {
 	@Inject
 	private PagamentoGateway pagamentoGateway;
 	
+	// execute a thread pool - avaiable on JEE 7
+	// new concurrence api of java 7
+	// with 50 thread
+	// do not user thread directly; it is not recommended
 	private static ExecutorService executor = Executors.newFixedThreadPool(50);
 	
 	/**
@@ -45,10 +49,19 @@ public class PagamentoService {
 	 * @param argUuid
 	 * @return
 	 */
-	/*@POST
-	public void pagarAssync(@Suspended final AsyncResponse ar, @QueryParam("uuid") String argUuid) {
+	public void pagarAssync(@Suspended final AsyncResponse asyncResponse, @QueryParam("uuid") String argUuid) {
+		/*
+		how notify server that run method finish ?
+		concurrence java API integrated with jax-rs and cdi with AsyncResponse class
+		@Suspended indicate that all execution will be exected on async way
+		@Suspended remove this process of the MAIN server thread, and discharge this thread of the POOL
+		use this technique always when you need call external app service
+		similiar NODEJS do
+		*/
+		
 		Compra compra = compraDao.buscaPorUuid(argUuid);
 		
+		//submit manage runnable objects
 		executor.submit(new Runnable() {
 			@Override
 			public void run() {
@@ -61,14 +74,14 @@ public class PagamentoService {
 							.queryParam("msg", "Compra Realizada com Sucesso")
 							.build();
 					Response response = Response.seeOther(responseUri).build();
-					ar.resume(response);
+					//when run finish, notify the server -> server notify client(http response)
+					asyncResponse.resume(response); //notify the server
 				} catch (Exception e) {
-					ar.resume(new WebApplicationException(e));
+					asyncResponse.resume(new WebApplicationException(e)); //notify the server
 				}
 			}
 		});
 	}
-	*/
 	
 	/**
 	 * should be here only one VERB in the class: GET, POST, PUT, DELETE, ETC
@@ -81,10 +94,20 @@ public class PagamentoService {
 		String resposta = pagamentoGateway.pagar(compra.getTotal());
 		System.out.println(resposta);
 		
-		URI responseUri = UriBuilder.fromPath("http://localhost:8080" + 
+		//after payment redirec to index page
+		
+		//set up uri
+		String protocol = "http";
+		String server = "localhost";
+		String port = "8080";
+		
+		//create a URI
+		URI responseUri = UriBuilder.fromPath(protocol+"://"+server+":"+port + 
 				context.getContextPath() + "/index.xhtml")
 				.queryParam("msg", "Compra Realizada com Sucesso")
 				.build();
+
+		//Send response
 		Response response = Response.seeOther(responseUri).build();
 		return response;
 		
