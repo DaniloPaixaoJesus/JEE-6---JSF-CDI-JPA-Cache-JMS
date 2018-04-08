@@ -4,7 +4,11 @@ import java.net.URI;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.jms.Destination;
+import javax.jms.JMSContext;
+import javax.jms.JMSProducer;
 import javax.servlet.ServletContext;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -30,12 +34,17 @@ import br.com.livrariaonline.loja.models.Compra;
 public class PagamentoService {
 
 	@Context
-	private ServletContext context;
-	
+	private ServletContext context;	
 	@Inject
 	private CompraDao compraDao;
 	@Inject
 	private PagamentoGateway pagamentoGateway;
+	
+	@Inject
+	private JMSContext jmsContext;
+	
+	@Resource(name="java:/jms/topics/CarrinhoComprasTopico")
+	private Destination destination;
 	
 	// execute a thread pool - avaiable on JEE 7
 	// new concurrence api of java 7
@@ -49,6 +58,7 @@ public class PagamentoService {
 	 * @param argUuid
 	 * @return
 	 */
+	@POST
 	public void pagarAssync(@Suspended final AsyncResponse asyncResponse, @QueryParam("uuid") String argUuid) {
 		/*
 		how notify server that run method finish ?
@@ -60,6 +70,10 @@ public class PagamentoService {
 		*/
 		
 		Compra compra = compraDao.buscaPorUuid(argUuid);
+
+		String contextPath = context.getContextPath(); 
+		
+		JMSProducer producer = jmsContext.createProducer();
 		
 		//submit manage runnable objects
 		executor.submit(new Runnable() {
@@ -69,13 +83,17 @@ public class PagamentoService {
 					String resposta = pagamentoGateway.pagar(compra.getTotal());
 					System.out.println(resposta);
 					
+					producer.send(destination, compra.getUuid());
+					
 					URI responseUri = UriBuilder.fromPath("http://localhost:8080" + 
-							context.getContextPath() + "/index.xhtml")
+							contextPath + "/index.xhtml")
 							.queryParam("msg", "Compra Realizada com Sucesso")
 							.build();
 					Response response = Response.seeOther(responseUri).build();
 					//when run finish, notify the server -> server notify client(http response)
 					asyncResponse.resume(response); //notify the server
+					
+					
 				} catch (Exception e) {
 					asyncResponse.resume(new WebApplicationException(e)); //notify the server
 				}
@@ -88,7 +106,6 @@ public class PagamentoService {
 	 * @param argUuid
 	 * @return
 	 */
-	@POST
 	public Response pagar(@QueryParam("uuid") String argUuid) {
 		Compra compra = compraDao.buscaPorUuid(argUuid);
 		String resposta = pagamentoGateway.pagar(compra.getTotal());
@@ -106,7 +123,7 @@ public class PagamentoService {
 				context.getContextPath() + "/index.xhtml")
 				.queryParam("msg", "Compra Realizada com Sucesso")
 				.build();
-
+		
 		//Send response
 		Response response = Response.seeOther(responseUri).build();
 		return response;
