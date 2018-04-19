@@ -151,10 +151,10 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jndi-name="java:jboss/datasources/casadocodigoDS" pool-name="casadocodigoDS">
-                    <connection-url>jdbc:mysql://localhost:3306/casadocodigo_javaee</connection-url>
+                <datasource jndi-name="java:jboss/datasources/livrariaOnLineDSmysql" pool-name="livrariaOnLineDSmysql">
+                    <connection-url>jdbc:mysql://localhost:3306/livrariaOnLine</connection-url>
                     <connection-property name="DatabaseName">
-                        casadocodigo_javaee
+                        livrariaOnLine
                     </connection-property>
                     <driver>mysql</driver>
                     <pool>
@@ -343,8 +343,8 @@
                 <smtp-server outbound-socket-binding-ref="mail-smtp"/>
             </mail-session>
             <mail-session name="gmail" jndi-name="java:jboss/mail/gmail">
-				<smtp-server outbound-socket-binding-ref="mail-smtp-gmail" ssl="true" username="any@any.com" password="anypassword"/>
-			</mail-session>
+                <smtp-server outbound-socket-binding-ref="mail-smtp-gmail" ssl="true" username="email@gmail.com" password="password"/>
+            </mail-session>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:messaging-activemq:1.0">
             <server name="default">
@@ -421,13 +421,15 @@
                 
                 
                 
-                <!-- NOVO security-domain -->
+                
+                
+                
                 <security-domain name="database-login" cache-type="default">
 			        <authentication>
 			            <login-module code="Database" flag="required">
 			                
 			                <module-option name="dsJndiName"
-			                    value="java:jboss/datasources/casadocodigoDS" />			
+			                    value="java:jboss/datasources/livrariaOnLineDSmysql" />			
 			                <module-option name="principalsQuery"
 			                    value="select senha from SystemUser where email = ?" />			
 			                <module-option name="rolesQuery"
@@ -440,7 +442,6 @@
 			            </login-module>
 			        </authentication>
 		    	</security-domain>
-                
             </security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:transactions:3.0">
@@ -513,8 +514,8 @@
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
         <outbound-socket-binding name="mail-smtp-gmail">
-    		<remote-destination host="smtp.gmail.com" port="465"/>
-		</outbound-socket-binding>
+            <remote-destination host="smtp.gmail.com" port="465"/>
+        </outbound-socket-binding>
     </socket-binding-group>
 
 </server>

@@ -3,6 +3,7 @@ package br.com.livrariaonline.loja.beans;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -15,8 +16,7 @@ import br.com.livrariaonline.loja.daos.LivroDao;
 import br.com.livrariaonline.loja.models.Autor;
 import br.com.livrariaonline.loja.models.Livro;
 
-@Named
-@RequestScoped
+@Model
 public class AdminLivrosBean {
 	
 	private Livro livro = new Livro();

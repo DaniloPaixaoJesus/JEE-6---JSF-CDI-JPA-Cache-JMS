@@ -32,7 +32,7 @@
 		<web-resource-collection>
 			<web-resource-name>administration</web-resource-name>
 			<description>CRUD for Books </description>
-			<url-pattern>/modulo/*</url-pattern>
+			<url-pattern>/livros/*</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>		
