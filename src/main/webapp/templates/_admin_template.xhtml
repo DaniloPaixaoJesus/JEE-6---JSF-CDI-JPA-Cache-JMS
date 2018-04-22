@@ -9,6 +9,7 @@
 <h:head>
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 	<h:outputStylesheet library="css" name="style-admin.css" />
+	<h:outputStylesheet library="css" name="style-admin-custom.css" />
 </h:head>
 
 <h:body>
@@ -16,12 +17,12 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#{request.getContextPath()}/index.xhtml">Casa do Código</a>
+				<a class="navbar-brand" href="#{request.getContextPath()}/index.xhtml">OnLine BookStore</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="${lista}"><h:link value="Lista" outcome="lista" /></li>
-					<li class="${cadastro}"><h:link value="Cadastro" outcome="form" /></li>
+					<li class="${livros}"><h:link value="Livro" outcome="/livros/lista" /></li>
+					<li class="${autores}"><h:link value="Autor" outcome="/autores/form" /></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="pad">

@@ -4,16 +4,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Casa do código - Login</title>
+
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../resources/css/style-admin.css" />
+
 </head>
 <body>
-
-	<form action="${request.getContextPath()}/j_security_check"
-		method="post">
-		<label>Login:</label> <input name="j_username" type="text" /> <label>Senha:</label>
-		<input name="j_password" type="password" />
-
-		<button type="submit">Login</button>
+<div class="container">
+	<h1 class="h1">ADMIN ACCESS</h1>
+	<form action="${request.getContextPath()}/j_security_check" method="post">
+		<div class="form-group">
+			<label>Login:</label> 
+			<input name="j_username" type="text" class="form-control" /> 
+		</div>
+		<div class="form-group">
+			<label>Senha:</label>
+			<input name="j_password" type="password" class="form-control" />
+		</div>
+		<button type="submit" class="btn btn-primary" >Login</button>
 	</form>
-
+</div>
 </body>
 </html>

@@ -7,7 +7,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <ui:composition template="/templates/_admin_template.xhtml">
-	<ui:param name="cadastro" value="active" />
+	<ui:param name="livros" value="active" />
 	<ui:define name="body">
 
 		<h1>Cadastro de livros</h1>
@@ -17,26 +17,26 @@
 				<h:outputLabel value="Título" />
 				<h:inputText value="#{adminLivrosBean.livro.titulo}" required="true"
 					id="titulo" styleClass="form-control" />
-				<h:message for="titulo" />
+				<h:message for="titulo" styleClass="red-color" />
 			</div>
 			<div class="form-group">
 				<h:outputLabel value="Descrição" />
 				<h:inputTextarea rows="4" cols="20" required="true"
 					value="#{adminLivrosBean.livro.descricao}" id="descricao"
 					styleClass="form-control" />
-				<h:message for="descricao" />
+				<h:message for="descricao" styleClass="red-color" />
 			</div>
 			<div class="form-group">
 				<h:outputLabel value="Número de Páginas" />
 				<h:inputText value="#{adminLivrosBean.livro.numeroPaginas}"
 					required="true" id="numeroPaginas" styleClass="form-control" />
-				<h:message for="numeroPaginas" />
+				<h:message for="numeroPaginas" styleClass="red-color"  />
 			</div>
 			<div class="form-group">
 				<h:outputLabel value="Preço" />
 				<h:inputText value="#{adminLivrosBean.livro.preco}" required="true"
 					id="preco" styleClass="form-control" />
-				<h:message for="preco" />
+				<h:message for="preco" styleClass="red-color"  />
 
 				<!-- 
 			h:inputText value="#{adminLivrosBean.livro.preco}" required="true" requiredMessage="O Preço é Obrigatório"
@@ -51,13 +51,13 @@
 					<f:selectItems value="#{adminLivrosBean.autores}" var="autor"
 						itemValue="#{autor}" itemLabel="#{autor.nome}" />
 				</h:selectManyListbox>
-				<h:message for="autores" />
+				<h:message for="autores" styleClass="red-color" />
 			</div>
 			<div class="form-group">
 				<h:outputLabel value="Data de Publicação" />
 				<h:inputText value="#{adminLivrosBean.livro.dataPublicacao}"
 					id="dataPublicacao" styleClass="form-control" />
-				<h:message for="dataPublicacao" />
+				<h:message for="dataPublicacao" styleClass="red-color"  />
 			</div>
 			<div class="form-group">
 				<h:outputLabel value="URL Capa do Livro" />
@@ -71,7 +71,7 @@
 			-->
 			</div>
 			<h:commandButton value="Cadastrar" action="#{adminLivrosBean.salvar}"
-				styleClass="btn btn-primary" />
+				styleClass="btn btn-outline-success" />
 
 		</h:form>
 
