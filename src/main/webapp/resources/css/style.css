@@ -2132,6 +2132,24 @@ a {
   display: none;
 }
 
+.buscaPrincipal-submit {
+  display: inline-block;
+  width: 50px;
+  height: 40px;
+  padding: 0;
+  vertical-align: middle;
+  background-image: url(//cdn.shopify.com/s/files/1/0155/7645/t/232/assets/search.svg?12268322646206348964);
+  background-color: rgba(255,255,255,0.2);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px;
+  border: none;
+  border-top-right-radius: 38px;
+  border-bottom-right-radius: 38px;
+  cursor: pointer;
+  margin-top: 1px;
+}
+
 .buscaPrincipal-campo {
   font-family: "open-sans", sans-serif;
   font-size: inherit;
@@ -2738,7 +2756,7 @@ a {
     width: 13em;
   }
 
-  .buscaPrincipal-submit {
+  .buscaPrincipal-submit2 {
     font-family: "museo", serif;
     background-image: url(//cdn.shopify.com/s/files/1/0155/7645/t/214/assets/search.svg?9766601392841079263);
     line-height: 0;
