@@ -1,5 +1,6 @@
 package br.com.livrariaonline.loja.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,7 +32,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Cacheable
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Livro {
+public class Livro implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2748029486847254617L;
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;

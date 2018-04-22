@@ -1,13 +1,13 @@
 package br.com.livrariaonline.loja.beans;
 
 import java.util.List;
+import java.util.Map;
 
-import javax.enterprise.context.RequestScoped;
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 
@@ -17,7 +17,7 @@ import br.com.livrariaonline.loja.models.Autor;
 import br.com.livrariaonline.loja.models.Livro;
 
 @Model
-public class AdminLivrosBean {
+public class AdminLivrosBean{
 	
 	private Livro livro = new Livro();
 	
@@ -33,19 +33,37 @@ public class AdminLivrosBean {
 	
 	private Part capaLivro;
 	
-	@Transactional
+	@PostConstruct
+	public void init(){
+		 Map<String,String> params = context.getExternalContext().getRequestParameterMap();
+		  String id = params.get("id");
+		  if(id != null){
+			  livro = dao.buscarPorId(new Integer(id));
+		  }
+	}
+	
 	public String salvar() {
 		
-		//FileSaver fileSaver = new FileSaver();
-		//String capaPath = fileSaver.write(capaLivro, "livros");
-		//livro.setCapaPath(capaPath);
-		dao.salvar(livro);
-		
+		if(livro.getId() == null){
+			return create();
+		}else{
+			return update();
+		} 
+	}
+	
+	@Transactional
+	public String create() {
+		dao.create(livro);		
 		context.getExternalContext().getFlash().setKeepMessages(true);//mantem as mensagens mesmo com o faces-redirect
 		context.addMessage(null, new FacesMessage("Livro cadastrado com sucesso!"));
-		
-		//o xhtml no final nao e obrigatorio
-		////faces-redirect para nao dar o forward
+		return "/livros/lista?faces-redirect=true"; 
+	}
+	
+	@Transactional
+	public String update() {
+		dao.update(livro);		
+		context.getExternalContext().getFlash().setKeepMessages(true);//mantem as mensagens mesmo com o faces-redirect
+		context.addMessage(null, new FacesMessage("Livro atualizado com sucesso!"));
 		return "/livros/lista?faces-redirect=true"; 
 	}
 

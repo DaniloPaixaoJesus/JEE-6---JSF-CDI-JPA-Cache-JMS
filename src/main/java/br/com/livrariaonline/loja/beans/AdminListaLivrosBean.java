@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.inject.Model;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import br.com.livrariaonline.loja.daos.LivroDao;
@@ -22,6 +21,15 @@ public class AdminListaLivrosBean {
 		this.livros = dao.listar();
 		
 		return livros;
+	}
+	
+	public String remove(Livro livro){
+		dao.remove(livro);
+		return "/livros/lista?faces-redirect=true"; 
+	}
+	
+	public String edit(Livro livro){
+		return "/livros/form?faces-redirect=true&id="+livro.getId();
 	}
 
 }

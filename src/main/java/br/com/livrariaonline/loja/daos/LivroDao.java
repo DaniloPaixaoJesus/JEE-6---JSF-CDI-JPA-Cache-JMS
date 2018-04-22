@@ -1,5 +1,6 @@
 package br.com.livrariaonline.loja.daos;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateful;
@@ -14,13 +15,22 @@ import org.hibernate.jpa.QueryHints;
 import br.com.livrariaonline.loja.models.Livro;
 
 @Stateful
-public class LivroDao {
+public class LivroDao implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4410701807806048627L;
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager manager;
 	
-	public void salvar(Livro livro) {
+	public void create(Livro livro) {
 		manager.persist(livro);
+	}
+	
+	public Livro update(Livro livro) {
+		manager.merge(livro);
+		return livro;
 	}
 	
 	public List<Livro> listar() {
@@ -28,6 +38,11 @@ public class LivroDao {
 				+ " join fetch l.autores";
 		
 		return manager.createQuery(jpql, Livro.class).getResultList();
+	}
+	
+	public String remove(Livro livro){
+		manager.remove(livro);
+		return "lista?face-redirect=true";
 	}
 
 	public List<Livro> ultimosLancamentos() {
